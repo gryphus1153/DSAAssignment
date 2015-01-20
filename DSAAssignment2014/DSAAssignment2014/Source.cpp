@@ -1,4 +1,6 @@
 #include <iostream>
+#include <string>
+#include<fstream>
 #include <vector>
 #include "Song.h"
 
@@ -7,25 +9,26 @@ using namespace std;
 vector<Song> songVector;
 int linesLoaded;
 
-void readSong();
+void readSongs();
 
 void main()
 {
-	cout << "Please enter the number of lines to be loaded";
+	cout << "Please enter the number of lines to be loaded ";
 	cin >> linesLoaded;
-	
+	readSongs();
 }
 
 void readSongs()
 {
 	int count = 0;
-	do
+	string line;
+	ifstream file ("mxm_779k_matches.txt");
+	while (getline(file, line) && count < (18 + linesLoaded))
 	{
-		//read line in
-
-
-
+		if (count > 18)
+		{
+			cout << line << "\n";
+		}
 		count++;
-		cout << 
-	} while (count < linesLoaded);
+	}
 }
