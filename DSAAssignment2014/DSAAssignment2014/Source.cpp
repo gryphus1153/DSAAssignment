@@ -20,14 +20,14 @@ void main()
 
 void readSongs()
 {
-	int count = 0;
+	int count = 1;
 	string line;
 	ifstream file ("mxm_779k_matches.txt");
-	while (getline(file, line) && count < (18 + linesLoaded))
+	while (getline(file, line) && count < (19 + linesLoaded))
 	{
-		if (count > 18)
+		if (count > 18 )
 		{
-			cout << line << "\n";
+			cout << count - 18 << " : " << line << "\n";
 		}
 		count++;
 	}

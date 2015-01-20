@@ -31,5 +31,8 @@
     <Text Include="mxm_779k_matches.txt">
       <Filter>Resource Files</Filter>
     </Text>
+    <Text Include="mxm_dataset_train.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>
