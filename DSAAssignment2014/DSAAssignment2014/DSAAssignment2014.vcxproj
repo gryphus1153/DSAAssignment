@@ -77,12 +77,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Song.cpp" />
+    <ClCompile Include="SortedArray.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="UnsortedArray.cpp" />
     <ClCompile Include="UnsortedPointer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Song.h" />
+    <ClInclude Include="SortedArray.h" />
     <ClInclude Include="UnsortedArray.h" />
     <ClInclude Include="UnsortedPointer.h" />
   </ItemGroup>
