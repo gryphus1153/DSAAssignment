@@ -17,7 +17,7 @@ void main()
 	cout << "Please enter the number of lines to be pre-loaded: ";
 	cin >> linesLoaded;
 	readSongs();
-	cout << linesLoaded << "lines were loaded into an STL Vector";
+	cout << linesLoaded << " lines were loaded into an STL Vector" << endl;
 }
 
 void readSongs()
@@ -40,7 +40,6 @@ void readSongs()
 				sarray[arraycount] = token;//stores the token in the temparray
 				line.erase(0, pos + delimiter.length());//removes the token + "<SEP>" from line
 				arraycount++;
-				cout << token << endl;
 			}
 			sarray[5] = line; //gets the remaining data that is not added to the array
 			Song s = Song(sarray[0], sarray[1], sarray[2], sarray[3], sarray[4], sarray[5]);//creates Song
