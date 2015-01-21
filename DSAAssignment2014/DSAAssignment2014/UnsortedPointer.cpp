@@ -93,7 +93,7 @@ void UnsortedPointer::remove(int index)
 // get an item at a specified position of the list (retrieve)
 ItemType UnsortedPointer::get(int index)
 {
-	ItemType dataItem = "NULL";
+	ItemType dataItem;
 	bool success = (index >= 1) && (index <= size);
 	if (success)
 	{
@@ -119,7 +119,7 @@ int UnsortedPointer::getLength()
 	return size;
 }
 
-//------------------- Other useful functions -----------------
+
 void UnsortedPointer::print()
 {
 	Node *temp = firstNode;
@@ -130,13 +130,29 @@ void UnsortedPointer::print()
 	{
 		while (temp != NULL)
 		{
-			cout << temp->item << endl;
+			cout << temp->item.getTid() << endl;
 			temp = temp->next;		// move to next node
 		}
 	}
 }
 
-// void replace(int index, ItemType item)
-// int search(ItemType item)
+//	to do sequential search
+
+ItemType UnsortedPointer::search(string target)
+{
+	ItemType dataItem;
+
+		Node *current = firstNode;
+	
+		while (current->next !=NULL)
+		{
+			if (current->item.getTid() == target)
+				return dataItem;				//returns the item
+			else
+				current = current->next;		// move to next node
+		}
+			
+
+}
 
 

@@ -12,10 +12,11 @@ class UnsortedArray
 {
 	private:
 		int size;
+		ItemType * items;
 
 	public:
 		//constructor
-		UnsortedArray::UnsortedArray()
+		UnsortedArray::UnsortedArray(int s);
 
 		//add a new item to the back of the list(append)
 		// pre : size < MAX_SIZE
@@ -41,6 +42,11 @@ class UnsortedArray
 		// return the item in the specified index of the list
 		ItemType get(int index);
 
+		// check the size of the list
+		// pre : none
+		// post: none
+		// return the number of items in the list
+		int getLength();
 
 		// to display all the items in the list
 		// pre : none
@@ -48,6 +54,6 @@ class UnsortedArray
 		void print();
 
 		// to do sequential search in the list
-		int search(ItemType[] dataArray, int n, ItemType target);
+		ItemType search(string target);
 
 };

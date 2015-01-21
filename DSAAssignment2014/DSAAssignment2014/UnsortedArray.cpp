@@ -1,10 +1,12 @@
+#pragma once
 //UnsortedArray.cpp
 #include "UnsortedArray.h" //header file
 
 //constructor
-UnsortedArray::UnsortedArray()
+UnsortedArray::UnsortedArray(int s)
 {
-	size = 0;
+	size = s;
+	items = new ItemType[size];
 }
 
 //add a new item to the back of the list (append)
@@ -12,6 +14,7 @@ bool UnsortedArray::add(ItemType newItem)
 {
 		items[size] = newItem; //add to the end of the list
 		size++;
+		return true;
 }
 
 // add a new item at a specified position in the list (insert)
@@ -57,6 +60,13 @@ ItemType UnsortedArray::get(int index)
 	return dataItem;
 }
 
+// check the size of the list
+int UnsortedArray::getLength()
+{
+	return size;
+}
+
+
 
 //display items in unsorted array
 void UnsortedArray::print()
@@ -69,10 +79,15 @@ void UnsortedArray::print()
 }
 
 // to do sequential search
-int search(int[] dataArray, int n, int target)
+ItemType UnsortedArray::search(string target)
 {
-	for (int i = 0; i<n; i++)
-	if (dataArray[i] == target) // found       return i;	      return -1; // not found 
+	Song s;
+	for (int i = 1; i <= getLength(); i++)
+	{
+		if (get(i).getTid() == target) // found       
+			return get(i);
+		else
+			return s;
+	}
 }
-
 	  

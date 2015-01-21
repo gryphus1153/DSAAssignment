@@ -1,11 +1,11 @@
+#pragma once
 //UnsortedPointer.h
 
 #include<string>
 #include<iostream>
-using namespace std;
-
 #include "Song.h"
 
+using namespace std;
 
 typedef Song ItemType;
 
@@ -64,11 +64,10 @@ public:
 	// return the number of items in the list
 	int getLength();
 
-	//------------------- Other useful functions -----------------
 
 	// display the items in the list
 	void print();
 
-	// void replace(int index, ItemType item);
-	// int search(ItemType item);
+	// does sequential seach for items in the list
+	ItemType search(string target);
 };
