@@ -81,6 +81,7 @@
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="UnsortedArray.cpp" />
     <ClCompile Include="UnsortedPointer.cpp" />
+    <ClCompile Include="UnsortedStackArray.cpp" />
     <ClCompile Include="UnsortedStackPointer.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -88,6 +89,7 @@
     <ClInclude Include="SortedArray.h" />
     <ClInclude Include="UnsortedArray.h" />
     <ClInclude Include="UnsortedPointer.h" />
+    <ClInclude Include="UnsortedStackArray.h" />
     <ClInclude Include="UnsortedStackPointer.h" />
   </ItemGroup>
   <ItemGroup>
