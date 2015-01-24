@@ -15,6 +15,11 @@ class UnsortedArray
 		ItemType * items;
 
 	public:
+
+		//default constructor
+
+		UnsortedArray();
+
 		//constructor
 		UnsortedArray(int s);
 

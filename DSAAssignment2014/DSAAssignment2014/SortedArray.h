@@ -15,6 +15,8 @@ private:
 	ItemType * items;
 
 public:
+	SortedArray();
+
 	SortedArray(int);
 
 	~SortedArray();
