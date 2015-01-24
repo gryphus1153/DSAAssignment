@@ -16,18 +16,18 @@ class UnsortedArray
 
 	public:
 		//constructor
-		UnsortedArray::UnsortedArray(int s);
+		UnsortedArray(int s);
 
 		//add a new item to the back of the list(append)
 		// pre : size < MAX_SIZE
 		// post: item is added to the end of the list
-		bool UnsortedArray::add(ItemType newItem);
+		bool add(ItemType newItem);
 
 		// add a new item at a specified position in the list (insert)
 		// pre : 1 <= index <= size && size < MAX_SIZE
 		// post: item is added to a specified position in the list
 		// items at the back are shifted backwards by 1 position
-		bool UnsortedArray::add(int index, ItemType newItem);
+		bool add(int index, ItemType newItem);
 
 		// remove an item at a specified position in the list
 		// pre : 1 <= index <= size

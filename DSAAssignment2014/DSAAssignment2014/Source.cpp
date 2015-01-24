@@ -4,6 +4,9 @@
 #include <fstream>
 #include <vector>
 #include "Song.h"
+#include <time.h>
+#include "SortedArray.h"
+#include <Windows.h>
 
 using namespace std;
 
@@ -14,10 +17,28 @@ void readSongs();//reads in a specified amount of song data
 
 void main()
 {
-	cout << "Please enter the number of lines to be pre-loaded: ";
-	cin >> linesLoaded;
+	clock_t t;
+	cout << "Please enter the number of lines to be pre-loaded (Range: 1 - 150,000): ";
+	do
+	{
+		cin >> linesLoaded;
+		if (cin.fail())
+		{
+			cout << "Please enter a valid input: ";
+		}
+		else if (linesLoaded < 1 || linesLoaded > 150000)
+		{
+			cout << "Value input is outside the allowed range. Please enter another value: ";
+		}
+		cin.clear();
+		cin.ignore(10000, '\n');
+	} while (cin.fail() || (linesLoaded < 1 || linesLoaded > 150000));
+	
+	t = clock();
 	readSongs();
-	cout << linesLoaded << " lines were loaded into an STL Vector" << endl;
+	t = clock() - t;
+	cout << linesLoaded << " lines were loaded into an STL Vector in ";
+	cout << ((float)t / CLOCKS_PER_SEC) << " seconds" << endl;
 }
 
 void readSongs()

@@ -73,8 +73,8 @@ void UnsortedArray::print()
 {
 	for (int i = 1; i <= getLength(); i++)
 	{
-		ItemType item = get(i);// cout << items[i-1] << endl;
-		// cout << item << endl;
+		ItemType item = get(i);
+		cout << item.getTid() << endl;
 	}
 }
 
