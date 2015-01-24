@@ -2,6 +2,12 @@
 //UnsortedArray.cpp
 #include "UnsortedArray.h" //header file
 
+// default constructor
+UnsortedArray::UnsortedArray()
+{
+	size = 0;
+}
+
 //constructor
 UnsortedArray::UnsortedArray(int s)
 {

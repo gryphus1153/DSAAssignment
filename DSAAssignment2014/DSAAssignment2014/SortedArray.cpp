@@ -1,6 +1,12 @@
 #include "SortedArray.h"
 
 
+// default constructor
+SortedArray::SortedArray()
+{
+
+}
+
 SortedArray::SortedArray(int s)
 {
 	count = 0;
