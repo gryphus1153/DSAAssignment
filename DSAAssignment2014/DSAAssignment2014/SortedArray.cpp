@@ -10,6 +10,7 @@ SortedArray::SortedArray(int s)
 
 SortedArray::~SortedArray()
 {
+
 }
 
 bool SortedArray::add(ItemType newItem)
