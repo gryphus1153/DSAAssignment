@@ -15,14 +15,21 @@ private:
 	ItemType * items;
 
 public:
-	SortedArray();
+	
+	SortedArray();//Default Constructor
 
-	SortedArray(int);
+	SortedArray(int); //Constructor
 
-	~SortedArray();
+	~SortedArray(); //Deconstructor
 
+	//Sorted adding of an item into a list
+	//Pre-Condition: count < size
+	//Post-Condition: Item is added to the list. Items after it are shifted 1 position
 	bool add(ItemType);
 
+	//Sorted adding of an item into a list
+	//Pre-Condition: There is an item in the array
+	//Post-Condition: Item at index is removed from the array
 	bool remove(int);
 
 	ItemType get(int);
@@ -31,8 +38,8 @@ public:
 
 	void print();
 
-	bool sequentialSearch(string);
+	int sequentialSearch(string);
 
-	bool binarySearch(string, int, int);
+	int binarySearch(string, int, int);
 };
 
