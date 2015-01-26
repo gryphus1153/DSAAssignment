@@ -20,11 +20,18 @@ private:
 
 	Node *firstNode;	// point to the first item
 	int  size;			// number of items in the list
+	int count;			//count
 
 public:
 
-	// constructor
+	//default constructor
 	UnsortedPointer();
+
+	// constructor
+	UnsortedPointer(int s);
+
+	// deconstructor
+	~UnsortedPointer();
 
 	// add a new item to the back of the list (append)
 	// pre : size < MAX_SIZE
@@ -62,12 +69,12 @@ public:
 	// pre : none
 	// post: none
 	// return the number of items in the list
-	int getLength();
+	int getCount();
 
 
 	// display the items in the list
 	void print();
 
 	// does sequential seach for items in the list
-	ItemType search(string target);
+	int sequentialSearch(string target);
 };

@@ -45,6 +45,6 @@ public:
 	void displayInOrderOfInsertion();
 
 	// does sequential seach for items in the list
-	ItemType search(string target);
+	int sequentialSearch(string target);
 
 };

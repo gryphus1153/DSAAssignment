@@ -5,12 +5,13 @@
 // default constructor
 UnsortedArray::UnsortedArray()
 {
-	size = 0;
+	count = 0;
 }
 
 //constructor
 UnsortedArray::UnsortedArray(int s)
 {
+	count = 0;
 	size = s;
 	items = new ItemType[size];
 }
@@ -67,9 +68,9 @@ ItemType UnsortedArray::get(int index)
 }
 
 // check the size of the list
-int UnsortedArray::getLength()
+int UnsortedArray::getCount()
 {
-	return size;
+	return count;
 }
 
 
@@ -77,7 +78,7 @@ int UnsortedArray::getLength()
 //display items in unsorted array
 void UnsortedArray::print()
 {
-	for (int i = 1; i <= getLength(); i++)
+	for (int i = 1; i <= getCount(); i++)
 	{
 		ItemType item = get(i);
 		cout << item.getTid() << endl;
@@ -85,15 +86,17 @@ void UnsortedArray::print()
 }
 
 // to do sequential search
-ItemType UnsortedArray::search(string target)
+int UnsortedArray::sequentialSearch(string target)
 {
-	Song s;
-	for (int i = 1; i <= getLength(); i++)
+	int pos = -1;
+	for (int i = 0; i < getCount(); i++)
 	{
-		if (get(i).getTid() == target) // found       
-			return get(i);
-		else
-			return s;
+		if (items[i].getTid().compare(target) == 0) // found
+		{
+			pos = i;
+			break;
+		}
 	}
+	return pos;
 }
 	  

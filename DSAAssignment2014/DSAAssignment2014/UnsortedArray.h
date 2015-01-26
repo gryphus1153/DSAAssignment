@@ -11,6 +11,7 @@ typedef Song ItemType;
 class UnsortedArray
 {
 	private:
+		int count;
 		int size;
 		ItemType * items;
 
@@ -51,7 +52,7 @@ class UnsortedArray
 		// pre : none
 		// post: none
 		// return the number of items in the list
-		int getLength();
+		int getCount();
 
 		// to display all the items in the list
 		// pre : none
@@ -59,6 +60,6 @@ class UnsortedArray
 		void print();
 
 		// to do sequential search in the list
-		ItemType search(string target);
+		int sequentialSearch(string target);
 
 };
