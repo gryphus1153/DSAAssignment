@@ -42,7 +42,10 @@ public:
 	bool isEmpty();
 
 	// display items in stack in order of insertion
-	void displayInOrderOfInsertion();
+	void print();
+
+	// remove the item from index
+
 
 	// does sequential seach for items in the list
 	int sequentialSearch(string target);

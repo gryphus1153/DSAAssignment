@@ -90,7 +90,7 @@ bool UnsortedStackPointer::isEmpty()
 }
 
 //	displays list in order of insertion
-void UnsortedStackPointer::displayInOrderOfInsertion()
+void UnsortedStackPointer::print()
 {
 
 	UnsortedStackPointer s;

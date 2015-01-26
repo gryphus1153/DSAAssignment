@@ -778,7 +778,116 @@ void performanceMenu()
 }
 
 //void unsortedStackPointerOptions(UnsortedStackPointer &uSPtr);
+void unsortedStackPointerOptions(UnsortedStackPointer &uSPArr)
+{
+	int option = 0;
+	int songsLoaded = 0;
+	do
+	{
+		cout << "\nUnsorted Stack Pointer" << endl;
+		displaySequentialMenu(uSPArr.getCount());////////////////////////
+		cin >> option;
+		switch (option)
+		{
+		case 1:
+			cout << "Enter the number of Songs to be loaded (Range: 1 - " << linesLoaded << "). Enter 0 to Exit: ";
 
+			do
+			{
+				cin >> songsLoaded;
+
+				if (cin.fail())
+				{
+					cout << "Please enter a valid input: ";
+				}
+				else if (songsLoaded == 0)
+				{
+					break;
+				}
+				else if (songsLoaded < 0 || songsLoaded > linesLoaded)
+				{
+					cout << "Value input is outside the allowed range. Please enter another value: ";
+				}
+				cin.clear();
+				cin.ignore(10000, '\n');
+			} while (cin.fail() || (songsLoaded < 0 || songsLoaded > linesLoaded));
+
+			uSPArr = UnsortedStackPointer(songsLoaded);
+
+			for (int i = 0; i < songsLoaded; i++)
+			{
+				uSPArr.push(songVector[i]);
+			}
+			break;
+
+		case 2:
+		{
+				  int index = 0;
+				  cout << "Enter the index of the Song to be removed (Range: 1 - " << songsLoaded << "). Enter 0 to Exit: ";
+
+				  do
+				  {
+					  cin >> index;
+
+					  if (cin.fail())
+					  {
+						  cout << "Please enter a valid input: ";
+					  }
+					  else if (index == 0)
+					  {
+						  break;
+					  }
+					  else if (index < 0 || index > songsLoaded)
+					  {
+						  cout << "Value input is outside the allowed range. Please enter another value: ";
+					  }
+					  cin.clear();
+					  cin.ignore(10000, '\n');
+				  } while (cin.fail() || (index < 0 || index > songsLoaded));
+
+				  if (index != 0)
+				  {
+					  uSPArr.remove(index);
+				  }
+		}
+			break;
+
+		case 3:
+		{
+				  string tid;
+				  cout << "Enter a TrackID. Enter 0 to return to previous menu: ";
+				  cin >> tid;
+				  if (tid != "0")
+				  {
+					  int index = uSPArr.sequentialSearch(tid);
+					  if (index == -1)
+					  {
+						  cout << "Song with Track ID " << tid << " not found" << endl;
+					  }
+					  else
+					  {
+						  Song s = uSPArr.get(index);
+						  cout << "Tid: " << s.getTid() << " Title:" << s.getTitle() << endl;
+					  }
+				  }
+		}
+			break;
+
+
+		case 4:
+			uSPArr.print();
+			break;
+
+		case 0:
+			break;
+
+		default:
+			cout << "Option entered was invalid." << endl;
+			break;
+		}
+	} while (option != 0);
+
+}
 
 //void performanceOptions(SortedArray &sArr, UnsortedArray &uArr, UnsortedPointer &uPtr)
 //{
