@@ -220,6 +220,7 @@ void sortedArrayOptions(SortedArray &sArr)
 			for (int i = 0; i < songsLoaded; i++)
 			{
 				sArr.add(songVector[i]);
+				cout << i << endl;
 			}
 			break;
 
@@ -339,7 +340,7 @@ void unsortedArrayOptions(UnsortedArray &uArr)
 	do
 	{
 		cout << "\nUnsorted Array" << endl;
-		displaySequentialMenu(uArr.getCount());////////////////////////
+		displaySequentialMenu(uArr.getCount());
 		cin >> option;
 		switch (option)
 		{
@@ -597,7 +598,7 @@ void unsortedStackArrayOptions(UnsortedStackArray &uSArr)
 
 		case 2:
 		{
-				 
+
 				  cout << "Enter the index of the Song to be removed (Range: 1 - " << songsLoaded << "). Enter 0 to Exit: ";
 
 				  do
@@ -625,7 +626,7 @@ void unsortedStackArrayOptions(UnsortedStackArray &uSArr)
 					  uSArr.remove(index);
 				  }
 
-			break;
+				  break;
 
 		case 3:
 		{
@@ -639,7 +640,14 @@ void unsortedStackArrayOptions(UnsortedStackArray &uSArr)
 					  {
 						  cout << "Song with Track ID " << tid << " not found" << endl;
 					  }
-					  else
+				  }
+		}
+			break;
+		}
+		}
+	} while (true);
+}
+void performanceOptions(SortedArray &sArr, UnsortedArray &uArr, UnsortedPointer &uPtr)
 {
 	int option;
 	int option2;
@@ -650,16 +658,16 @@ void unsortedStackArrayOptions(UnsortedStackArray &uSArr)
 	PROCESS_MEMORY_COUNTERS pmc;
 	int numberOfTimes[6] = { 1, 10, 100, 1000, 10000, 100000 };
 	string dataStructType[5] = { "sArr", "uArr", "uPtr" };
-	string dataStrutFunction[5] = { "Add", "Remove", "SeqS", "BinS" }
+	string dataStructFunction[5] = { "Add", "Remove", "SeqS", "BinS", "Disp" };
 	string perfType[2] = { "Cpu", "Mem" };
 	ofstream cpuFile;
 	ofstream memFile;
 
 	//sArr
-	cpuFile.open(dataStructType[0] + perfType[0] + ".dat");
-	memFile.open(dataStructType[0] + perfType[1] + ".dat");
+	cpuFile.open(dataStructType[0] + dataStructFunction[0] + perfType[0] + ".dat");
+	memFile.open(dataStructType[0] + dataStructFunction[0] + perfType[1] + ".dat");
 	cout << "processing..." << endl;
-	for (int i = 0; i < 3 ; i++)
+	for (int i = 0; i < 6 ; i++)
 	{
 		//adding
 		GetProcessMemoryInfo(GetCurrentProcess(), &pmc, sizeof(pmc));
@@ -680,56 +688,56 @@ void unsortedStackArrayOptions(UnsortedStackArray &uSArr)
 	cpuFile.close();
 	memFile.close();
 
-	//uArr
-	cpuFile.open(dataStructType[1] + perfType[0] + ".dat");
-	memFile.open(dataStructType[1] + perfType[1] + ".dat");
-	cout << "processing..." << endl;
-	for (int i = 0; i < 4; i++)
-	{
+	////uArr
+	//cpuFile.open(dataStructType[1] + perfType[0] + ".dat");
+	//memFile.open(dataStructType[1] + perfType[1] + ".dat");
+	//cout << "processing..." << endl;
+	//for (int i = 0; i < 4; i++)
+	//{
 
-		GetProcessMemoryInfo(GetCurrentProcess(), &pmc, sizeof(pmc));
-		mStart = pmc.WorkingSetSize;
-		t = clock();
-		uArr = UnsortedArray(numberOfTimes[i]);
-		for (int i = 0; i < numberOfTimes[i]; i++)
-		{
-			uArr.add(songVector[i]);
-		}
-		t = clock() - t;
-		GetProcessMemoryInfo(GetCurrentProcess(), &pmc, sizeof(pmc));
-		m = pmc.WorkingSetSize - mStart;
-		float time = ((float)t / CLOCKS_PER_SEC);
-		cpuFile << numberOfTimes[i] << " " << time << endl;
-		memFile << numberOfTimes[i] << " " << (m / 4096) << endl;
-	}
-	cpuFile.close();
-	memFile.close();
+	//	GetProcessMemoryInfo(GetCurrentProcess(), &pmc, sizeof(pmc));
+	//	mStart = pmc.WorkingSetSize;
+	//	t = clock();
+	//	uArr = UnsortedArray(numberOfTimes[i]);
+	//	for (int i = 0; i < numberOfTimes[i]; i++)
+	//	{
+	//		uArr.add(songVector[i]);
+	//	}
+	//	t = clock() - t;
+	//	GetProcessMemoryInfo(GetCurrentProcess(), &pmc, sizeof(pmc));
+	//	m = pmc.WorkingSetSize - mStart;
+	//	float time = ((float)t / CLOCKS_PER_SEC);
+	//	cpuFile << numberOfTimes[i] << " " << time << endl;
+	//	memFile << numberOfTimes[i] << " " << (m / 4096) << endl;
+	//}
+	//cpuFile.close();
+	//memFile.close();
 
-	//uArr
-	cpuFile.open(dataStructType[2] + perfType[0] + ".dat");
-	memFile.open(dataStructType[2] + perfType[1] + ".dat");
-	cout << "processing..." << endl;
-	for (int i = 0; i < 4; i++)
-	{
-		//adding
-		GetProcessMemoryInfo(GetCurrentProcess(), &pmc, sizeof(pmc));
-		mStart = pmc.WorkingSetSize;
-		t = clock();
-		uPtr = UnsortedPointer();
-		for (int i = 0; i < numberOfTimes[i]; i++)
-		{
-			uPtr.add(songVector[i]);
-		}
-		t = clock() - t;
-		GetProcessMemoryInfo(GetCurrentProcess(), &pmc, sizeof(pmc));
-		m = pmc.WorkingSetSize - mStart;
-		float time = ((float)t / CLOCKS_PER_SEC);
-		cpuFile << numberOfTimes[i] << " " << time << endl;
-		memFile << numberOfTimes[i] << " " << (m / 4096) << endl;
-		
-	}
-	cpuFile.close();
-	memFile.close();
+	////uArr
+	//cpuFile.open(dataStructType[2] + perfType[0] + ".dat");
+	//memFile.open(dataStructType[2] + perfType[1] + ".dat");
+	//cout << "processing..." << endl;
+	//for (int i = 0; i < 4; i++)
+	//{
+	//	//adding
+	//	GetProcessMemoryInfo(GetCurrentProcess(), &pmc, sizeof(pmc));
+	//	mStart = pmc.WorkingSetSize;
+	//	t = clock();
+	//	uPtr = UnsortedPointer();
+	//	for (int i = 0; i < numberOfTimes[i]; i++)
+	//	{
+	//		uPtr.add(songVector[i]);
+	//	}
+	//	t = clock() - t;
+	//	GetProcessMemoryInfo(GetCurrentProcess(), &pmc, sizeof(pmc));
+	//	m = pmc.WorkingSetSize - mStart;
+	//	float time = ((float)t / CLOCKS_PER_SEC);
+	//	cpuFile << numberOfTimes[i] << " " << time << endl;
+	//	memFile << numberOfTimes[i] << " " << (m / 4096) << endl;
+	//	
+	//}
+	//cpuFile.close();
+	//memFile.close();
 
 	performanceMenu();
 	cin >> option;
@@ -741,7 +749,7 @@ void unsortedStackArrayOptions(UnsortedStackArray &uSArr)
 		switch (option2)
 		{
 		case 1:
-			plot("plot \"sArrCpu.dat\" with linespoints, \"uArrCpu.dat\" with linespoints");
+			plot("plot \"sArrAddCpu.dat\" with linespoints");// \"uArrCpu.dat\" with linespoints");
 			break;
 		case 2:
 			plot("plot \"sArrMem.dat\" with linespoints, \"uArrMem.dat\" with linespoints");
