@@ -804,7 +804,7 @@ void unsortedStackPointerOptions(UnsortedStackPointer &uSPArr)
 				cin.ignore(10000, '\n');
 			} while (cin.fail() || (songsLoaded < 0 || songsLoaded > linesLoaded));
 
-			uSPArr = UnsortedStackPointer(songsLoaded);
+			uSPArr = UnsortedStackPointer();
 
 			for (int i = 0; i < songsLoaded; i++)
 			{

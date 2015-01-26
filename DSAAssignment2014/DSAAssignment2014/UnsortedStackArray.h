@@ -39,7 +39,7 @@ public:
 	bool isEmpty();
 
 	// gets size of array
-	int getCount();
+	int getCount()
 
 	// print out in order of insertion
 	void print();
