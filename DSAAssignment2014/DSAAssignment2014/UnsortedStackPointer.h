@@ -20,10 +20,13 @@ private:
 	};
 
 	Node *topNode;	//point to the first item
+	int count;
+	int size;
 
 public:
 	//constructor
 	UnsortedStackPointer();
+	UnsortedStackPointer(int s);
 	~UnsortedStackPointer();
 
 	// push item on top of the stack
@@ -41,11 +44,17 @@ public:
 	// check if the stack is empty
 	bool isEmpty();
 
+	//	 gets count
+	int getCount();
+
 	// display items in stack in order of insertion
 	void print();
 
 	// remove the item from index
+	void remove(int index);
 
+	//gets the item index
+	ItemType get(int index);
 
 	// does sequential seach for items in the list
 	int sequentialSearch(string target);

@@ -7,11 +7,20 @@
 
 using namespace std;
 
-// constructor
+//default constructor
 UnsortedStackPointer::UnsortedStackPointer()
 {
-	topNode = NULL;
+	count = 0;
 }
+
+// constructor
+UnsortedStackPointer::UnsortedStackPointer(int s)
+{
+	topNode = NULL;
+	count = 0;
+	size = s;
+}
+
 
 //	deconstructor
 UnsortedStackPointer::~UnsortedStackPointer()
@@ -89,26 +98,70 @@ bool UnsortedStackPointer::isEmpty()
 		return false;
 }
 
+// gets count
+int UnsortedStackPointer::getCount()
+{
+	return count;
+}
+
 //	displays list in order of insertion
 void UnsortedStackPointer::print()
 {
-
-	UnsortedStackPointer s;
-	ItemType t;
-	while (!isEmpty())
+	Node *temp = topNode;
+	if (temp == NULL)
+		cout << "The list is empty." << endl;
+	else
 	{
-		getTop(t);
-		s.push(t);
-		pop();
+		while (temp != NULL)
+		{
+			cout << temp->item.getTid() << endl;
+			temp = temp->next;		// move to next node
+		}
+	}
+}
+
+
+// removes item from index
+void UnsortedStackPointer::remove(int index)
+{
+	bool success = (index >= 1) && (index <= size);
+	if (success)
+	{
+		if (index == 1) // remove front node
+			topNode = topNode->next;
+		else
+		{
+			Node *current = topNode;
+			Node *previous = topNode;
+			for (int i = 1; i<index; i++)
+			{
+				previous = current;
+				current = current->next;		// move to next node
+			}
+
+			previous->next = current->next;	// delete the current node by
+		}		                                // making previous node point to the node pointed to by current node
+
+		size--;  // decrease the size of the list by one
 	}
 
-	while (!s.isEmpty())
+}
+
+// gets item from index
+ItemType UnsortedStackPointer::get(int index)
+{
+	ItemType dataItem;
+	bool success = (index >= 1) && (index <= size);
+	if (success)
 	{
-		s.getTop(t);
-		push(t);
-		s.pop();
-		cout << t.getTid() << endl;
+		Node *current = topNode;
+		for (int i = 1; i<index; i++)
+			current = current->next;		// move to next node
+
+		dataItem = current->item;
 	}
+
+	return dataItem;
 }
 
 // does sequential seach for items in the list
