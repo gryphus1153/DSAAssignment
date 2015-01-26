@@ -12,11 +12,19 @@ class UnsortedStackArray
 {
 private:
 	int top;	//index that keeps track of the top of the stack
+	int count;
 	int size;
 	ItemType * items;
+
 public:
+	//default constructor
+	UnsortedStackArray();
+
 	//	constructor
 	UnsortedStackArray(int);
+
+	// destructor
+	~UnsortedStackArray();
 
 	// add a new item to the top of the stack (push)
 	void push(ItemType& item);
@@ -29,5 +37,11 @@ public:
 
 	//	check if the stack is empty
 	bool isEmpty();
+
+	// gets size of array
+	int getCount();
+
+	// does sequential search
+	int sequentialSearch(string);
 
 };
