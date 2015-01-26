@@ -112,17 +112,20 @@ void UnsortedStackPointer::displayInOrderOfInsertion()
 }
 
 // does sequential seach for items in the list
-ItemType UnsortedStackPointer::search(string target)
+int UnsortedStackPointer::sequentialSearch(string target)
 {
 	UnsortedStackPointer s;
 	ItemType t;
+	int count = 0;
 	while (!isEmpty())
 	{
 		getTop(t);
 		if (t.getTid() == target)
-			return t;				//returns the item
+			return count;				//returns the item
 		else
 		s.push(t);
 		pop();
+		count++;
 	}
+	return -1;
 }

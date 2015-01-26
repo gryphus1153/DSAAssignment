@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Song">
+    <Position X="7.5" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAmAAAQRAAJEAAAgAgCJkAAgAAAAEAAAAAAAAAACA=</HashCode>
+      <FileName>Song.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SortedArray">
+    <Position X="4.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAEBIpAQAAAAAAAAAAAAAAIAAAGAIA=</HashCode>
+      <FileName>SortedArray.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="UnsortedArray">
+    <Position X="10.5" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAQAAAAAAAAEAAAEAIgAQAAAAAAAAAAAACAAAAACAAA=</HashCode>
+      <FileName>UnsortedArray.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="UnsortedPointer">
+    <Position X="10.5" Y="0.5" Width="1.5" />
+    <NestedTypes>
+      <Struct Name="UnsortedPointer::Node" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>UnsortedPointer.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Struct>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAEAAAEAIAAQAAIAAAAAAAAACAAAAACQAA=</HashCode>
+      <FileName>UnsortedPointer.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="UnsortedStackArray">
+    <Position X="4.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIgAAIgAAIAAAAAAAAAIIAAAQAA=</HashCode>
+      <FileName>UnsortedStackArray.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="UnsortedStackPointer">
+    <Position X="2.25" Y="2.25" Width="1.5" />
+    <NestedTypes>
+      <Struct Name="UnsortedStackPointer::Node" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>UnsortedStackPointer.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Struct>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AACAAAAgAAAAAAAAAAAAEIAAAIAAAAAAgCAIAAAAQAA=</HashCode>
+      <FileName>UnsortedStackPointer.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Typedef Name="ItemType" Collapsed="true">
+    <Position X="7.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>SortedArray.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

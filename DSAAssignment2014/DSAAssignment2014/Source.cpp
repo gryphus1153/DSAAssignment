@@ -312,12 +312,334 @@ void sortedArrayOptions(SortedArray &sArr)
 	
 }
 
-//void unsortedArrayOptions(UnsortedArray &uArr);
-//void unsortedPointerOptions(UnsortedPointer &uPtr);
-//void unsortedStackArrayOptions(UnsortedStackArray &uSArr);
-//void unsortedStackPointerOptions(UnsortedStackPointer &uSPtr);
+// displays Sequential Search Menu
+void displaySequentialMenu(int count)
+{
+	cout << endl;
+	cout << "1. Add to Data Structure" << endl;
+	if (count > 0)
+	{
+		cout << "2. Delete from Data Structure" << endl;
+		cout << "3. Do Sequential Search" << endl;
+		cout << "4. Print Track ID of all songs in Data Structure" << endl;
+	}
+	cout << "0. Return to previous menu" << endl;
+	if (count == 0)
+	{
+		cout << "\nAdditional options require Songs to be added to the Data Structure" << endl << "\n";
+	}
+	cout << "Enter Option: ";
+}
 
-void performanceOptions(SortedArray &sArr, UnsortedArray &uArr, UnsortedPointer &uPtr)
+//  Options for UnsortedArray List
+void unsortedArrayOptions(UnsortedArray &uArr)
+{
+	int option = 0;
+	int songsLoaded = 0;
+	do
+	{
+		cout << "\nUnsorted Array" << endl;
+		displaySequentialMenu(uArr.getCount());////////////////////////
+		cin >> option;
+		switch (option)
+		{
+		case 1:
+			cout << "Enter the number of Songs to be loaded (Range: 1 - " << linesLoaded << "). Enter 0 to Exit: ";
+
+			do
+			{
+				cin >> songsLoaded;
+
+				if (cin.fail())
+				{
+					cout << "Please enter a valid input: ";
+				}
+				else if (songsLoaded == 0)
+				{
+					break;
+				}
+				else if (songsLoaded < 0 || songsLoaded > linesLoaded)
+				{
+					cout << "Value input is outside the allowed range. Please enter another value: ";
+				}
+				cin.clear();
+				cin.ignore(10000, '\n');
+			} while (cin.fail() || (songsLoaded < 0 || songsLoaded > linesLoaded));
+
+			uArr = UnsortedArray(songsLoaded);
+			for (int i = 0; i < songsLoaded; i++)
+			{
+				uArr.add(songVector[i]);
+			}
+			break;
+
+		case 2:
+		{
+				  int index = 0;
+				  cout << "Enter the index of the Song to be removed (Range: 1 - " << songsLoaded << "). Enter 0 to Exit: ";
+
+				  do
+				  {
+					  cin >> index;
+
+					  if (cin.fail())
+					  {
+						  cout << "Please enter a valid input: ";
+					  }
+					  else if (index == 0)
+					  {
+						  break;
+					  }
+					  else if (index < 0 || index > songsLoaded)
+					  {
+						  cout << "Value input is outside the allowed range. Please enter another value: ";
+					  }
+					  cin.clear();
+					  cin.ignore(10000, '\n');
+				  } while (cin.fail() || (index < 0 || index > songsLoaded));
+
+				  if (index != 0)
+				  {
+					  uArr.remove(index);
+				  }
+		}
+			break;
+
+		case 3:
+		{
+				  string tid;
+				  cout << "Enter a TrackID. Enter 0 to return to previous menu: ";
+				  cin >> tid;
+				  if (tid != "0")
+				  {
+					  int index = uArr.sequentialSearch(tid);
+					  if (index == -1)
+					  {
+						  cout << "Song with Track ID " << tid << " not found" << endl;
+					  }
+					  else
+					  {
+						  Song s = uArr.get(index);
+						  cout << "Tid: " << s.getTid() << " Title:" << s.getTitle() << endl;
+					  }
+				  }
+		}
+			break;
+
+
+		case 4:
+			uArr.print();
+			break;
+
+		case 0:
+			break;
+
+		default:
+			cout << "Option entered was invalid." << endl;
+			break;
+		}
+	} while (option != 0);
+
+}
+
+//void unsortedPointerOptions(UnsortedPointer &uPtr);
+void unsortedPointerOptions(UnsortedPointer &upArr)
+{
+	int option = 0;
+	int songsLoaded = 0;
+	do
+	{
+		cout << "\nUnsorted Pointer Array" << endl;
+		displaySequentialMenu(upArr.getCount());////////////////////////
+		cin >> option;
+		switch (option)
+		{
+		case 1:
+			cout << "Enter the number of Songs to be loaded (Range: 1 - " << linesLoaded << "). Enter 0 to Exit: ";
+
+			do
+			{
+				cin >> songsLoaded;
+
+				if (cin.fail())
+				{
+					cout << "Please enter a valid input: ";
+				}
+				else if (songsLoaded == 0)
+				{
+					break;
+				}
+				else if (songsLoaded < 0 || songsLoaded > linesLoaded)
+				{
+					cout << "Value input is outside the allowed range. Please enter another value: ";
+				}
+				cin.clear();
+				cin.ignore(10000, '\n');
+			} while (cin.fail() || (songsLoaded < 0 || songsLoaded > linesLoaded));
+
+			upArr = UnsortedPointer(songsLoaded);
+			for (int i = 0; i < songsLoaded; i++)
+			{
+				upArr.add(songVector[i]);
+			}
+			break;
+
+		case 2:
+		{
+				  int index = 0;
+				  cout << "Enter the index of the Song to be removed (Range: 1 - " << songsLoaded << "). Enter 0 to Exit: ";
+
+				  do
+				  {
+					  cin >> index;
+
+					  if (cin.fail())
+					  {
+						  cout << "Please enter a valid input: ";
+					  }
+					  else if (index == 0)
+					  {
+						  break;
+					  }
+					  else if (index < 0 || index > songsLoaded)
+					  {
+						  cout << "Value input is outside the allowed range. Please enter another value: ";
+					  }
+					  cin.clear();
+					  cin.ignore(10000, '\n');
+				  } while (cin.fail() || (index < 0 || index > songsLoaded));
+
+				  if (index != 0)
+				  {
+					  upArr.remove(index);
+				  }
+		}
+			break;
+
+		case 3:
+		{
+				  string tid;
+				  cout << "Enter a TrackID. Enter 0 to return to previous menu: ";
+				  cin >> tid;
+				  if (tid != "0")
+				  {
+					  int index = upArr.sequentialSearch(tid);
+					  if (index == -1)
+					  {
+						  cout << "Song with Track ID " << tid << " not found" << endl;
+					  }
+					  else
+					  {
+						  Song s = upArr.get(index);
+						  cout << "Tid: " << s.getTid() << " Title:" << s.getTitle() << endl;
+					  }
+				  }
+		}
+			break;
+
+
+		case 4:
+			upArr.print();
+			break;
+
+		case 0:
+			break;
+
+		default:
+			cout << "Option entered was invalid." << endl;
+			break;
+		}
+	} while (option != 0);
+
+}
+
+//void unsortedStackArrayOptions(UnsortedStackArray &uSArr);
+void unsortedStackArrayOptions(UnsortedStackArray &uSArr)
+{
+	int option = 0;
+	int songsLoaded = 0;
+	int index = 0;
+	do
+	{
+		cout << "\nUnsorted Stack Array" << endl;
+		displaySequentialMenu(uSArr.getCount());////////////////////////
+		cin >> option;
+		switch (option)
+		{
+		case 1:
+			cout << "Enter the number of Songs to be loaded (Range: 1 - " << linesLoaded << "). Enter 0 to Exit: ";
+
+			do
+			{
+				cin >> songsLoaded;
+				if (cin.fail())
+				{
+					cout << "Please enter a valid input: ";
+				}
+				else if (songsLoaded == 0)
+				{
+					break;
+				}
+				else if (songsLoaded < 0 || songsLoaded > linesLoaded)
+				{
+					cout << "Value input is outside the allowed range. Please enter another value: ";
+				}
+				cin.clear();
+				cin.ignore(10000, '\n');
+			} while (cin.fail() || (songsLoaded < 0 || songsLoaded > linesLoaded));
+
+			uSArr = UnsortedStackArray(songsLoaded);
+			for (int i = 0; i < songsLoaded; i++)
+			{
+				uSArr.push(songVector[i]);
+			}
+			break;
+
+		case 2:
+		{
+				 
+				  cout << "Enter the index of the Song to be removed (Range: 1 - " << songsLoaded << "). Enter 0 to Exit: ";
+
+				  do
+				  {
+					  cin >> index;
+
+					  if (cin.fail())
+					  {
+						  cout << "Please enter a valid input: ";
+					  }
+					  else if (index == 0)
+					  {
+						  break;
+					  }
+					  else if (index < 0 || index > songsLoaded)
+					  {
+						  cout << "Value input is outside the allowed range. Please enter another value: ";
+					  }
+					  cin.clear();
+					  cin.ignore(10000, '\n');
+				  } while (cin.fail() || (index < 0 || index > songsLoaded));
+
+				  if (index != 0)
+				  {
+					  uSArr.remove(index);
+				  }
+
+			break;
+
+		case 3:
+		{
+				  string tid;
+				  cout << "Enter a TrackID. Enter 0 to return to previous menu: ";
+				  cin >> tid;
+				  if (tid != "0")
+				  {
+					  int index = uSArr.sequentialSearch(tid);
+					  if (index == -1)
+					  {
+						  cout << "Song with Track ID " << tid << " not found" << endl;
+					  }
+					  else
 {
 	int option;
 	int option2;
@@ -446,3 +768,11 @@ void performanceMenu()
 	cout << "0. Return to previous menu" << endl;
 	cout << "Enter Option: ";
 }
+
+//void unsortedStackPointerOptions(UnsortedStackPointer &uSPtr);
+
+
+//void performanceOptions(SortedArray &sArr, UnsortedArray &uArr, UnsortedPointer &uPtr)
+//{
+
+//}

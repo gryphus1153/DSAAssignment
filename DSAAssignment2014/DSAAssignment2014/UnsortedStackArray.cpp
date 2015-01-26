@@ -65,6 +65,67 @@ int UnsortedStackArray::getCount()
 	return count;
 }
 
+// print in order of insertion
+void UnsortedStackArray::print()
+{
+
+	UnsortedStackArray s;
+	ItemType t;
+	while (!isEmpty())
+	{
+		getTop(t);
+		s.push(t);
+		pop();
+	}
+
+	while (!s.isEmpty())
+	{
+		s.getTop(t);
+		push(t);
+		s.pop();
+		cout << t.getTid() << endl;
+	}
+}
+
+void UnsortedStackArray::remove(int index)
+{
+	UnsortedStackArray s;
+	ItemType t;
+	for (int i = 0; i < index - 1; i++)
+	{
+		pop();
+		s.push(t);
+	}
+	pop();
+	for (int i = 0; i < index - 1; i++)
+	{
+		s.pop();
+		push(t);	
+	}
+	
+}
+
+/// PLEASE CHECK MY LOGIC HERE
+ItemType UnsortedStackArray::get(int index)
+{
+
+	UnsortedStackArray s;
+	ItemType t;
+	for (int i = 0; i < index; i++)
+	{
+		pop();
+		s.push(t);
+	}
+	return t;
+	for (int i = 0; i < index - 1; i++)
+	{
+		s.pop();
+		push(t);
+	}
+}
+
+
+
 int UnsortedStackArray::sequentialSearch(string target)
 {
 	int pos = -1;

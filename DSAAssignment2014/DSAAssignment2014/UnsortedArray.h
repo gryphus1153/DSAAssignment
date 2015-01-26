@@ -60,6 +60,6 @@ class UnsortedArray
 		void print();
 
 		// to do sequential search in the list
-		ItemType search(string target);
+		int sequentialSearch(string target);
 
 };

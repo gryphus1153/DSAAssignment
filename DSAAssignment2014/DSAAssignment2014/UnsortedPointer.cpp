@@ -3,11 +3,22 @@
 #include <cstddef>  // for NULL
 #include <new>      // for bad_alloc
 
-// constructor
+// default constructor
 UnsortedPointer::UnsortedPointer()
 {
+	count = 0;
+}
+
+//constructor
+UnsortedPointer::UnsortedPointer(int s)
+{
+	count = s;
 	firstNode = NULL;
-	size = 0;
+}
+
+// deconstructor
+UnsortedPointer::~UnsortedPointer()
+{
 }
 
 // add a new item to the back of the list (append)
@@ -114,7 +125,7 @@ bool UnsortedPointer::isEmpty()
 }
 
 // check the size of the list
-int UnsortedPointer::getLength()
+int UnsortedPointer::getCount()
 {
 	return size;
 }
@@ -138,20 +149,22 @@ void UnsortedPointer::print()
 
 //	to do sequential search
 
-ItemType UnsortedPointer::search(string target)
+int UnsortedPointer::sequentialSearch(string target)
 {
 	ItemType dataItem;
+	int count = 0;
 
 		Node *current = firstNode;
 	
 		while (current->next !=NULL)
 		{
 			if (current->item.getTid() == target)
-				return dataItem;				//returns the item
+				return count;				//returns the item
 			else
 				current = current->next;		// move to next node
+			count++;
 		}
-			
+		return -1;
 
 }
 

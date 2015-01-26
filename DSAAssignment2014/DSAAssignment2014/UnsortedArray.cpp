@@ -86,15 +86,17 @@ void UnsortedArray::print()
 }
 
 // to do sequential search
-ItemType UnsortedArray::search(string target)
+int UnsortedArray::sequentialSearch(string target)
 {
-	Song s;
-	for (int i = 1; i <= size; i++)
+	int pos = -1;
+	for (int i = 0; i < getCount(); i++)
+{
+		if (items[i].getTid().compare(target) == 0) // found
 	{
-		if (get(i).getTid() == target) // found       
-			return get(i);
-		else
-			return s;
+			pos = i;
+			break;
+		}
 	}
+	return pos;
 }
 	  

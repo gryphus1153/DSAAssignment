@@ -41,7 +41,15 @@ public:
 	// gets size of array
 	int getCount();
 
+	// print out in order of insertion
+	void print();
+
+	// remove item from index
+	void remove(int index);
+
+	// get item of that index
+	ItemType get(int index);
+
 	// does sequential search
 	int sequentialSearch(string);
-
 };
