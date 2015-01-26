@@ -19,8 +19,8 @@ UnsortedArray::UnsortedArray(int s)
 //add a new item to the back of the list (append)
 bool UnsortedArray::add(ItemType newItem)
 {
-		items[size] = newItem; //add to the end of the list
-		size++;
+		items[count] = newItem; //add to the end of the list
+		count++;
 		return true;
 }
 
@@ -90,9 +90,9 @@ int UnsortedArray::sequentialSearch(string target)
 {
 	int pos = -1;
 	for (int i = 0; i < getCount(); i++)
-	{
+{
 		if (items[i].getTid().compare(target) == 0) // found
-		{
+	{
 			pos = i;
 			break;
 		}
