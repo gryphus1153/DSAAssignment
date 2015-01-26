@@ -85,6 +85,7 @@
     <ClCompile Include="UnsortedStackPointer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="GnuplotBridge.h" />
     <ClInclude Include="Song.h" />
     <ClInclude Include="SortedArray.h" />
     <ClInclude Include="UnsortedArray.h" />

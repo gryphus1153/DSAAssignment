@@ -5,12 +5,13 @@
 // default constructor
 UnsortedArray::UnsortedArray()
 {
-	size = 0;
+	count = 0;
 }
 
 //constructor
 UnsortedArray::UnsortedArray(int s)
 {
+	count = 0;
 	size = s;
 	items = new ItemType[size];
 }
@@ -18,8 +19,8 @@ UnsortedArray::UnsortedArray(int s)
 //add a new item to the back of the list (append)
 bool UnsortedArray::add(ItemType newItem)
 {
-		items[size] = newItem; //add to the end of the list
-		size++;
+		items[count] = newItem; //add to the end of the list
+		count++;
 		return true;
 }
 
@@ -67,9 +68,9 @@ ItemType UnsortedArray::get(int index)
 }
 
 // check the size of the list
-int UnsortedArray::getLength()
+int UnsortedArray::getCount()
 {
-	return size;
+	return count;
 }
 
 
@@ -77,7 +78,7 @@ int UnsortedArray::getLength()
 //display items in unsorted array
 void UnsortedArray::print()
 {
-	for (int i = 1; i <= getLength(); i++)
+	for (int i = 1; i <= getCount(); i++)
 	{
 		ItemType item = get(i);
 		cout << item.getTid() << endl;
@@ -88,7 +89,7 @@ void UnsortedArray::print()
 ItemType UnsortedArray::search(string target)
 {
 	Song s;
-	for (int i = 1; i <= getLength(); i++)
+	for (int i = 1; i <= size; i++)
 	{
 		if (get(i).getTid() == target) // found       
 			return get(i);
