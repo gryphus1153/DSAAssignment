@@ -1,5 +1,11 @@
+/*
+UnsortedArray.h: Unsorted Array Based List Data Structure
+
+Amirulamin Bin Mohd Osman (S10139137F)
+Emmanuelle Myls Joie Gregorio (S10145392)
+
+*/
 #pragma once
-//UnsortedArray.h
 #include<string>
 #include<iostream>
 #include "Song.h"
@@ -23,6 +29,8 @@ class UnsortedArray
 
 		//constructor
 		UnsortedArray(int s);
+
+		~UnsortedArray();
 
 		//add a new item to the back of the list(append)
 		// pre : size < MAX_SIZE

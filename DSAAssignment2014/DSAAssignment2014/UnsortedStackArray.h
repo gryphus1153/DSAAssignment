@@ -1,5 +1,13 @@
+/*
+UnsortedStackArray.h: Unsorted Array Based Stack Data Structure
+
+Amirulamin Bin Mohd Osman (S10139137F)
+Emmanuelle Myls Joie Gregorio (S10145392)
+
+*/
+
 #pragma once
-//UnsortedStackArray.h
+
 #include<string>
 #include<iostream>
 #include "Song.h"

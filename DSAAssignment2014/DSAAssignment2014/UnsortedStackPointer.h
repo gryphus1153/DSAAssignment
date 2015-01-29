@@ -1,5 +1,12 @@
+/*
+UnsortedStackPointer.h: Unsorted Pointer Based Stack Data Structure
+
+Amirulamin Bin Mohd Osman (S10139137F)
+Emmanuelle Myls Joie Gregorio (S10145392)
+
+*/
 #pragma once
-//UnsortedStackPointer.h
+
 
 #include <string>
 #include <iostream>

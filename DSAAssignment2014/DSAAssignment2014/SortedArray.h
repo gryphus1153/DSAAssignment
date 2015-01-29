@@ -1,3 +1,12 @@
+/*
+SortedArray.h: Sorted Array Based List Data Structure
+
+Amirulamin Bin Mohd Osman (S10139137F)
+Emmanuelle Myls Joie Gregorio (S10145392)
+
+Highlighted Features:
+Sorted Insertion when adding elements
+*/
 #pragma once
 #include<string>
 #include<iostream>

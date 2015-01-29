@@ -1,28 +1,38 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Gnuplot">
+    <Position X="3" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAAAAAAAEAAAAAAAAAAAAAEAAAAAAAIAAAA=</HashCode>
+      <FileName>GnuplotBridge.h</FileName>
+    </TypeIdentifier>
+  </Class>
   <Class Name="Song">
-    <Position X="7.5" Y="1.25" Width="1.5" />
+    <Position X="8.5" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAmAAAQRAAJEAAAgAgCJkAAgAAAAEAAAAAAAAAACA=</HashCode>
       <FileName>Song.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SortedArray">
-    <Position X="4.75" Y="3.75" Width="1.5" />
+    <Position X="11.25" Y="5.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAAAAAAAAAAAEBIpAQAAAAAAAAAAAAAAIAAAGAIA=</HashCode>
       <FileName>SortedArray.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="UnsortedArray">
-    <Position X="10.5" Y="4" Width="1.5" />
+    <Position X="5.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>EAQAAAAAAAAEAAAEAIgAQAAAAAAAAAAAACAAAAACAAA=</HashCode>
+      <HashCode>EAQAAAAAAAAAAAAEBIgAQAAAAAAAAAAAAAAIAAAGAgA=</HashCode>
       <FileName>UnsortedArray.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="UnsortedPointer">
-    <Position X="10.5" Y="0.5" Width="1.5" />
+    <Position X="3.75" Y="3.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
     <NestedTypes>
       <Struct Name="UnsortedPointer::Node" Collapsed="true">
         <TypeIdentifier>
@@ -31,19 +41,22 @@
       </Struct>
     </NestedTypes>
     <TypeIdentifier>
-      <HashCode>AAQAAAAAAAAEAAAEAIAAQAAIAAAAAAAAACAAAAACQAA=</HashCode>
+      <HashCode>AAQAAAAAAAAAAAAEBAAAQAAIAAAAACAAAAAIAAAGQAA=</HashCode>
       <FileName>UnsortedPointer.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="UnsortedStackArray">
-    <Position X="4.75" Y="0.5" Width="1.5" />
+    <Position X="5.75" Y="4.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAIgAAIgAAIAAAAAAAAAIIAAAQAA=</HashCode>
+      <HashCode>AAQAAAAAAAAAAAAEBIgAQIgAAIAAAAAEAAAIIAAEQAA=</HashCode>
       <FileName>UnsortedStackArray.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="UnsortedStackPointer">
-    <Position X="2.25" Y="2.25" Width="1.5" />
+    <Position X="11.25" Y="0.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
     <NestedTypes>
       <Struct Name="UnsortedStackPointer::Node" Collapsed="true">
         <TypeIdentifier>
@@ -52,12 +65,12 @@
       </Struct>
     </NestedTypes>
     <TypeIdentifier>
-      <HashCode>AACAAAAgAAAAAAAAAAAAEIAAAIAAAAAAgCAIAAAAQAA=</HashCode>
+      <HashCode>AAQAAAAgAAAAAAAEBIAAUIAAAIAAAAAAgAAIAAAEQAA=</HashCode>
       <FileName>UnsortedStackPointer.h</FileName>
     </TypeIdentifier>
   </Class>
   <Typedef Name="ItemType" Collapsed="true">
-    <Position X="7.5" Y="0.5" Width="1.5" />
+    <Position X="8.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>SortedArray.h</FileName>

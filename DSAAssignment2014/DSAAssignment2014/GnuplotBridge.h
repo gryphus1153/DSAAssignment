@@ -1,3 +1,10 @@
+/*
+GnuplotBridge.h: Allows the implementation of gnuplot in the program
+
+Amirulamin Bin Mohd Osman (S10139137F)
+Emmanuelle Myls Joie Gregorio (S10145392)
+
+*/
 #ifndef GNUPLOT_H_
 #define GNUPLOT_H_
 #include <string>

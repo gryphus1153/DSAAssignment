@@ -3,16 +3,10 @@
 #include <cstddef>  // for NULL
 #include <new>      // for bad_alloc
 
-// default constructor
+//constructor
 UnsortedPointer::UnsortedPointer()
 {
 	count = 0;
-}
-
-//constructor
-UnsortedPointer::UnsortedPointer(int s)
-{
-	count = s;
 	firstNode = NULL;
 }
 
@@ -39,7 +33,7 @@ bool UnsortedPointer::add(ItemType newItem)
 		temp->next = newNode;		// make last node point to the new node
 	}
 
-	size++;
+	count++;
 
 	return true;  // no size constraint
 }
@@ -47,7 +41,7 @@ bool UnsortedPointer::add(ItemType newItem)
 // add a new item at a specified position in the list (insert)
 bool UnsortedPointer::add(int index, ItemType newItem)
 {
-	bool success = (index >= 1) && (index <= size + 1);
+	bool success = (index >= 1) && (index <= count + 1);
 
 	if (success)
 	{
@@ -70,7 +64,7 @@ bool UnsortedPointer::add(int index, ItemType newItem)
 			newNode->next = temp->next;	// make new node point to the node pointed to by temp
 			temp->next = newNode;		// make temp point to the new node
 		}
-		size++;
+		count++;
 	}
 
 	return success;
@@ -79,7 +73,7 @@ bool UnsortedPointer::add(int index, ItemType newItem)
 // remove an item at a specified position in the list
 void UnsortedPointer::remove(int index)
 {
-	bool success = (index >= 1) && (index <= size);
+	bool success = (index >= 1) && (index <= count);
 	if (success)
 	{
 		if (index == 1) // remove front node
@@ -97,7 +91,7 @@ void UnsortedPointer::remove(int index)
 			previous->next = current->next;	// delete the current node by
 		}		                                // making previous node point to the node pointed to by current node
 
-		size--;  // decrease the size of the list by one
+		count--;  // decrease the size of the list by one
 	}
 }
 
@@ -105,11 +99,11 @@ void UnsortedPointer::remove(int index)
 ItemType UnsortedPointer::get(int index)
 {
 	ItemType dataItem;
-	bool success = (index >= 1) && (index <= size);
+	bool success = (index >= 0) && (index < count);
 	if (success)
 	{
 		Node *current = firstNode;
-		for (int i = 1; i<index; i++)
+		for (int i = 0; i<index; i++)
 			current = current->next;		// move to next node
 
 		dataItem = current->item;
@@ -121,13 +115,13 @@ ItemType UnsortedPointer::get(int index)
 // check if the list is empty
 bool UnsortedPointer::isEmpty()
 {
-	return size == 0;
+	return count == 0;
 }
 
 // check the size of the list
 int UnsortedPointer::getCount()
 {
-	return size;
+	return count;
 }
 
 
@@ -139,7 +133,7 @@ void UnsortedPointer::print()
 		cout << "The list is empty." << endl;
 	else
 	{
-		while (temp != NULL)
+		while (temp->next != NULL)
 		{
 			cout << temp->item.getTid() << endl;
 			temp = temp->next;		// move to next node
@@ -152,17 +146,17 @@ void UnsortedPointer::print()
 int UnsortedPointer::sequentialSearch(string target)
 {
 	ItemType dataItem;
-	int count = 0;
+	int icount = 0;
 
 		Node *current = firstNode;
 	
 		while (current->next !=NULL)
 		{
 			if (current->item.getTid() == target)
-				return count;				//returns the item
+				return icount ;				//returns the item
 			else
 				current = current->next;		// move to next node
-			count++;
+			icount++;
 		}
 		return -1;
 

@@ -97,6 +97,9 @@
     <Text Include="mxm_779k_matches.txt" />
     <Text Include="mxm_dataset_train.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

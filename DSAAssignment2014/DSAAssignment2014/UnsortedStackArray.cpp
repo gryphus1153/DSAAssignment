@@ -20,6 +20,7 @@ UnsortedStackArray::UnsortedStackArray(int s)
 {
 	count = 0;
 	size = s;
+	items = new ItemType[size];
 	top = -1;
 }
 
@@ -34,6 +35,7 @@ void UnsortedStackArray::push(ItemType& item)
 
 		++top;
 		items[top] = item; // push the item
+		count++;
 }
 
 //  pop item from top of the stack
@@ -43,6 +45,7 @@ bool UnsortedStackArray::pop()
 	if (success)
 	{
 		--top;  //  pop top
+		count--;
 	}
 	return success;
 }
@@ -69,12 +72,13 @@ int UnsortedStackArray::getCount()
 void UnsortedStackArray::print()
 {
 
-	UnsortedStackArray s;
+	UnsortedStackArray s = UnsortedStackArray(getCount());
 	ItemType t;
 	while (!isEmpty())
 	{
 		getTop(t);
 		s.push(t);
+		cout << t.getTid() << endl;
 		pop();
 	}
 
@@ -83,7 +87,7 @@ void UnsortedStackArray::print()
 		s.getTop(t);
 		push(t);
 		s.pop();
-		cout << t.getTid() << endl;
+		
 	}
 }
 

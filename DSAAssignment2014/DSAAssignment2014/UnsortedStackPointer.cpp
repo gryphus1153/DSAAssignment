@@ -38,11 +38,13 @@ bool UnsortedStackPointer::push(ItemType& item)
 	if (isEmpty())
 	{
 		topNode = newNode;
+		count++;
 	}
 	else
 	{
 		newNode->next = topNode;
 		topNode = newNode;
+		count++;
 	}
 	return true;
 
@@ -155,7 +157,7 @@ ItemType UnsortedStackPointer::get(int index)
 	if (success)
 	{
 		Node *current = topNode;
-		for (int i = 1; i<index; i++)
+		for (int i = 0; i<index; i++)
 			current = current->next;		// move to next node
 
 		dataItem = current->item;
@@ -174,7 +176,7 @@ int UnsortedStackPointer::sequentialSearch(string target)
 	{
 		getTop(t);
 		if (t.getTid() == target)
-			return count;				//returns the item
+			return count - 1;				//returns the item
 		else
 		s.push(t);
 		pop();

@@ -1,5 +1,11 @@
+/*
+UnsortedPointer.h: Unsorted Pointer Based Data Structure
+
+Amirulamin Bin Mohd Osman (S10139137F)
+Emmanuelle Myls Joie Gregorio (S10145392)
+
+*/
 #pragma once
-//UnsortedPointer.h
 
 #include<string>
 #include<iostream>
@@ -19,7 +25,6 @@ private:
 	};
 
 	Node *firstNode;	// point to the first item
-	int  size;			// number of items in the list
 	int count;			//count
 
 public:

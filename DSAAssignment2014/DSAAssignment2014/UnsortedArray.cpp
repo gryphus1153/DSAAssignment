@@ -16,12 +16,30 @@ UnsortedArray::UnsortedArray(int s)
 	items = new ItemType[size];
 }
 
+UnsortedArray::~UnsortedArray()
+{
+
+}
+
 //add a new item to the back of the list (append)
 bool UnsortedArray::add(ItemType newItem)
 {
-		items[count] = newItem; //add to the end of the list
-		count++;
-		return true;
+	bool success = false;
+	if (getCount() < size)
+	{
+		if (getCount() == 0)
+		{
+			items[0] = newItem;
+			success = true;
+			count++;
+		}
+		else
+		{
+			items[count] = newItem;
+			count++;
+		}
+	}
+	return success;
 }
 
 // add a new item at a specified position in the list (insert)
@@ -90,10 +108,10 @@ int UnsortedArray::sequentialSearch(string target)
 {
 	int pos = -1;
 	for (int i = 0; i < getCount(); i++)
-{
-		if (items[i].getTid().compare(target) == 0) // found
 	{
-			pos = i;
+		if (items[i].getTid().compare(target) == 0) // found
+		{
+			pos = i + 1;
 			break;
 		}
 	}

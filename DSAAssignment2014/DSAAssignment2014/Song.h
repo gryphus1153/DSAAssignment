@@ -1,3 +1,10 @@
+/*
+Song.h: Song Object
+
+Amirulamin Bin Mohd Osman (S10139137F)
+Emmanuelle Myls Joie Gregorio (S10145392)
+
+*/
 #pragma once
 #include <string>
 using namespace std;

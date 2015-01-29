@@ -1,3 +1,13 @@
+/*
+source.cpp: Contains the main
+
+Amirulamin Bin Mohd Osman (S10139137F)
+Emmanuelle Myls Joie Gregorio (S10145392)
+
+Highlighted Features:
+GnuPlot is implemented to show the comparisons
+*/
+
 #include <iostream>
 #include <iomanip>
 #include <sstream>
@@ -23,27 +33,34 @@ using namespace std;
 
 int linesLoaded;
 vector<Song> songVector;
-int sessionNo = time(0);
+
+void readSongs();			// reads in a specified amount of song data
 
 void displayWelcome();		//	introduction
 void viewList();			//	chooses type of list to display
-void displayMenu(int count);			//	shows options for list
-void displayBinaryMenu(int count);	// shows options for lists with binary search option
-void readSongs();			// reads in a specified amount of song data
 
 void sortedArrayOptions(SortedArray &sArr);
 void unsortedArrayOptions(UnsortedArray &uArr);
 void unsortedPointerOptions(UnsortedPointer &uPtr);
 void unsortedStackArrayOptions(UnsortedStackArray &uSArr);
 void unsortedStackPointerOptions(UnsortedStackPointer &uSPtr);
-void performanceOptions(SortedArray &sArr, UnsortedArray &uArr, UnsortedPointer &uPtr);
+void performanceOptions(SortedArray &sArr, UnsortedArray &uArr, UnsortedPointer &uPtr, UnsortedStackArray &uSArr, UnsortedStackPointer &uSPtr);
+
+void displayMenu(int count);			//	shows options for list
+void displayBinaryMenu(int count);	// shows options for lists with binary search option
 void performanceMenu();
-void plot(string);
+void performanceTypeMenu();
 
 void main()
 {
 	//Variables
 	clock_t t;				//CPU Clock
+	SortedArray sArray;
+	UnsortedArray uArray;
+	UnsortedPointer uPointer;
+	UnsortedStackArray uStackArray;
+	UnsortedStackPointer uStackPointer;
+
 	//Operations
 	cout << "Please enter the number of lines to be pre-loaded (Range: 1 - 150,000). Enter 0 to Exit: ";
 	do
@@ -75,9 +92,6 @@ void main()
 	int option = 0;
 	do
 	{
-		SortedArray sArray;
-		UnsortedArray uArray;
-		UnsortedPointer uPointer;
 
 		displayWelcome();	// official introduction
 		viewList();			// show options for application
@@ -87,12 +101,26 @@ void main()
 		{
 		case 1: //Sorted Array
 			sortedArrayOptions(sArray);
+			break;
 		case 2: //Unsorted Array
-			//unsortedArrayOptions(uArray);
+			unsortedArrayOptions(uArray);
+			break;
+		case 3:
+			unsortedPointerOptions(uPointer);
+			break;
+		case 4:
+			unsortedStackArrayOptions(uStackArray);
+			break;
+		case 5:
+			unsortedStackPointerOptions(uStackPointer);
 			break;
 		case 6:
-			performanceOptions(sArray, uArray, uPointer);
+			performanceOptions(sArray, uArray, uPointer, uStackArray, uStackPointer);
+			break;
+		case 0:
+			break;
 		default:
+			cout << "Invalid option entered" << endl;
 			break;
 		}
 	}while (option != 0);	// Loop the menu
@@ -178,6 +206,11 @@ void viewList()
 	cout << endl;
 	cout << "1. Sorted Array" << endl;
 	cout << "2. Unsorted Array" << endl;
+	cout << "3. Unsorted Pointer" << endl;
+	cout << "4. Unsorted Stack Array" << endl;
+	cout << "5. Unsorted Stack Pointer" << endl;
+	cout << "6. Performance Comparison" << endl;
+	cout << "0. Exit" << endl;
 	cout << endl;
 	cout << "Enter Option: ";
 }
@@ -220,7 +253,6 @@ void sortedArrayOptions(SortedArray &sArr)
 			for (int i = 0; i < songsLoaded; i++)
 			{
 				sArr.add(songVector[i]);
-				cout << i << endl;
 			}
 			break;
 
@@ -440,18 +472,17 @@ void unsortedArrayOptions(UnsortedArray &uArr)
 			break;
 		}
 	} while (option != 0);
-
 }
 
 //void unsortedPointerOptions(UnsortedPointer &uPtr);
-void unsortedPointerOptions(UnsortedPointer &upArr)
+void unsortedPointerOptions(UnsortedPointer &uPtr)
 {
 	int option = 0;
 	int songsLoaded = 0;
 	do
 	{
 		cout << "\nUnsorted Pointer Array" << endl;
-		displaySequentialMenu(upArr.getCount());////////////////////////
+		displaySequentialMenu(uPtr.getCount());
 		cin >> option;
 		switch (option)
 		{
@@ -478,10 +509,11 @@ void unsortedPointerOptions(UnsortedPointer &upArr)
 				cin.ignore(10000, '\n');
 			} while (cin.fail() || (songsLoaded < 0 || songsLoaded > linesLoaded));
 
-			upArr = UnsortedPointer(songsLoaded);
+			uPtr = UnsortedPointer();
 			for (int i = 0; i < songsLoaded; i++)
 			{
-				upArr.add(songVector[i]);
+				uPtr.add(songVector[i]);
+				songsLoaded -= 1;
 			}
 			break;
 
@@ -512,7 +544,8 @@ void unsortedPointerOptions(UnsortedPointer &upArr)
 
 				  if (index != 0)
 				  {
-					  upArr.remove(index);
+					  uPtr.remove(index);
+					  songsLoaded -= 1;
 				  }
 		}
 			break;
@@ -524,14 +557,14 @@ void unsortedPointerOptions(UnsortedPointer &upArr)
 				  cin >> tid;
 				  if (tid != "0")
 				  {
-					  int index = upArr.sequentialSearch(tid);
+					  int index = uPtr.sequentialSearch(tid);
 					  if (index == -1)
 					  {
 						  cout << "Song with Track ID " << tid << " not found" << endl;
 					  }
 					  else
 					  {
-						  Song s = upArr.get(index);
+						  Song s = uPtr.get(index);
 						  cout << "Tid: " << s.getTid() << " Title:" << s.getTitle() << endl;
 					  }
 				  }
@@ -540,7 +573,7 @@ void unsortedPointerOptions(UnsortedPointer &upArr)
 
 
 		case 4:
-			upArr.print();
+			uPtr.print();
 			break;
 
 		case 0:
@@ -563,7 +596,7 @@ void unsortedStackArrayOptions(UnsortedStackArray &uSArr)
 	do
 	{
 		cout << "\nUnsorted Stack Array" << endl;
-		displaySequentialMenu(uSArr.getCount());////////////////////////
+		displaySequentialMenu(uSArr.getCount());
 		cin >> option;
 		switch (option)
 		{
@@ -598,194 +631,81 @@ void unsortedStackArrayOptions(UnsortedStackArray &uSArr)
 
 		case 2:
 		{
+			cout << "Enter the index of the Song to be removed (Range: 1 - " << songsLoaded << "). Enter 0 to Exit: ";
 
-				  cout << "Enter the index of the Song to be removed (Range: 1 - " << songsLoaded << "). Enter 0 to Exit: ";
+			do
+			{
+				cin >> index;
 
-				  do
-				  {
-					  cin >> index;
+				if (cin.fail())
+				{
+					cout << "Please enter a valid input: ";
+				}
+				else if (index == 0)
+				{
+					break;
+				}
+				else if (index < 0 || index > songsLoaded)
+				{
+					cout << "Value input is outside the allowed range. Please enter another value: ";
+				}
+				cin.clear();
+				cin.ignore(10000, '\n');
+			  } while (cin.fail() || (index < 0 || index > songsLoaded));
 
-					  if (cin.fail())
-					  {
-						  cout << "Please enter a valid input: ";
-					  }
-					  else if (index == 0)
-					  {
-						  break;
-					  }
-					  else if (index < 0 || index > songsLoaded)
-					  {
-						  cout << "Value input is outside the allowed range. Please enter another value: ";
-					  }
-					  cin.clear();
-					  cin.ignore(10000, '\n');
-				  } while (cin.fail() || (index < 0 || index > songsLoaded));
-
-				  if (index != 0)
-				  {
-					  uSArr.remove(index);
-				  }
-
-				  break;
+			 if (index != 0)
+			 {
+				uSArr.remove(index);
+				songsLoaded -= 1;
+			 }
+		}
+			break;
 
 		case 3:
 		{
-				  string tid;
-				  cout << "Enter a TrackID. Enter 0 to return to previous menu: ";
-				  cin >> tid;
-				  if (tid != "0")
-				  {
-					  int index = uSArr.sequentialSearch(tid);
-					  if (index == -1)
-					  {
-						  cout << "Song with Track ID " << tid << " not found" << endl;
-					  }
-				  }
+			string tid;
+			cout << "Enter a TrackID. Enter 0 to return to previous menu: ";
+			cin >> tid;
+			if (tid != "0")
+			{
+				int index = uSArr.sequentialSearch(tid);
+				if (index == -1)
+				{
+					cout << "Song with Track ID " << tid << " not found" << endl;
+				}
+				else
+				{
+					Song s = uSArr.get(index);
+					cout << "Tid: " << s.getTid() << " Title:" << s.getTitle() << endl;
+				}
+			}
 		}
 			break;
-		}
-		}
-	} while (true);
-}
-void performanceOptions(SortedArray &sArr, UnsortedArray &uArr, UnsortedPointer &uPtr)
-{
-	int option;
-	int option2;
-	Gnuplot plot;
-	clock_t t;
-	int mStart;
-	int m;
-	PROCESS_MEMORY_COUNTERS pmc;
-	int numberOfTimes[6] = { 1, 10, 100, 1000, 10000, 100000 };
-	string dataStructType[5] = { "sArr", "uArr", "uPtr" };
-	string dataStructFunction[5] = { "Add", "Remove", "SeqS", "BinS", "Disp" };
-	string perfType[2] = { "Cpu", "Mem" };
-	ofstream cpuFile;
-	ofstream memFile;
 
-	//sArr
-	cpuFile.open(dataStructType[0] + dataStructFunction[0] + perfType[0] + ".dat");
-	memFile.open(dataStructType[0] + dataStructFunction[0] + perfType[1] + ".dat");
-	cout << "processing..." << endl;
-	for (int i = 0; i < 6 ; i++)
-	{
-		//adding
-		GetProcessMemoryInfo(GetCurrentProcess(), &pmc, sizeof(pmc));
-		mStart = pmc.WorkingSetSize;
-		t = clock();
-		sArr = SortedArray(numberOfTimes[i]);
-		for (int i = 0; i < numberOfTimes[i]; i++)
-		{
-			sArr.add(songVector[i]);
-		}
-		t = clock() - t;
-		GetProcessMemoryInfo(GetCurrentProcess(), &pmc, sizeof(pmc));
-		m = pmc.WorkingSetSize - mStart;
-		float time = ((float)t / CLOCKS_PER_SEC);
-		cpuFile << numberOfTimes[i] << " " << time << endl;
-		memFile << numberOfTimes[i] << " " << (m/4096) << endl;
-	}
-	cpuFile.close();
-	memFile.close();
 
-	////uArr
-	//cpuFile.open(dataStructType[1] + perfType[0] + ".dat");
-	//memFile.open(dataStructType[1] + perfType[1] + ".dat");
-	//cout << "processing..." << endl;
-	//for (int i = 0; i < 4; i++)
-	//{
-
-	//	GetProcessMemoryInfo(GetCurrentProcess(), &pmc, sizeof(pmc));
-	//	mStart = pmc.WorkingSetSize;
-	//	t = clock();
-	//	uArr = UnsortedArray(numberOfTimes[i]);
-	//	for (int i = 0; i < numberOfTimes[i]; i++)
-	//	{
-	//		uArr.add(songVector[i]);
-	//	}
-	//	t = clock() - t;
-	//	GetProcessMemoryInfo(GetCurrentProcess(), &pmc, sizeof(pmc));
-	//	m = pmc.WorkingSetSize - mStart;
-	//	float time = ((float)t / CLOCKS_PER_SEC);
-	//	cpuFile << numberOfTimes[i] << " " << time << endl;
-	//	memFile << numberOfTimes[i] << " " << (m / 4096) << endl;
-	//}
-	//cpuFile.close();
-	//memFile.close();
-
-	////uArr
-	//cpuFile.open(dataStructType[2] + perfType[0] + ".dat");
-	//memFile.open(dataStructType[2] + perfType[1] + ".dat");
-	//cout << "processing..." << endl;
-	//for (int i = 0; i < 4; i++)
-	//{
-	//	//adding
-	//	GetProcessMemoryInfo(GetCurrentProcess(), &pmc, sizeof(pmc));
-	//	mStart = pmc.WorkingSetSize;
-	//	t = clock();
-	//	uPtr = UnsortedPointer();
-	//	for (int i = 0; i < numberOfTimes[i]; i++)
-	//	{
-	//		uPtr.add(songVector[i]);
-	//	}
-	//	t = clock() - t;
-	//	GetProcessMemoryInfo(GetCurrentProcess(), &pmc, sizeof(pmc));
-	//	m = pmc.WorkingSetSize - mStart;
-	//	float time = ((float)t / CLOCKS_PER_SEC);
-	//	cpuFile << numberOfTimes[i] << " " << time << endl;
-	//	memFile << numberOfTimes[i] << " " << (m / 4096) << endl;
-	//	
-	//}
-	//cpuFile.close();
-	//memFile.close();
-
-	performanceMenu();
-	cin >> option;
-	switch (option)
-	{
-	case 1:
-
-		cin >> option2;
-		switch (option2)
-		{
-		case 1:
-			plot("plot \"sArrAddCpu.dat\" with linespoints");// \"uArrCpu.dat\" with linespoints");
+		case 4:
+			uSArr.print();
 			break;
-		case 2:
-			plot("plot \"sArrMem.dat\" with linespoints, \"uArrMem.dat\" with linespoints");
+
+		case 0:
+			break;
+
 		default:
+			cout << "Option entered was invalid." << endl;
 			break;
 		}
-		break;
-
-	case 2:
-		break;
-	default:
-		break;
-	}
-}
-
-void performanceMenu()
-{
-	cout << endl;
-	cout << "1. Compare add performance for all" << endl;
-	cout << "2. Compare remove for all" << endl;
-	cout << "3. Compare Sequential Search for all" << endl;
-	cout << "4. Compare display performance for all" << endl;
-	cout << "5. Compare search performance between Binary and Sequnential" << endl;
-	cout << "0. Return to previous menu" << endl;
-	cout << "Enter Option: ";
+	} while (option != 0);
 }
 
 //void unsortedStackPointerOptions(UnsortedStackPointer &uSPtr);
-void unsortedStackPointerOptions(UnsortedStackPointer &uSPArr)
+void unsortedStackPointerOptions(UnsortedStackPointer &uSPtr)
 {
 	int option = 0;
 	int songsLoaded = 0;
 	do
 	{
 		cout << "\nUnsorted Stack Pointer" << endl;
-		displaySequentialMenu(uSPArr.getCount());////////////////////////
+		displaySequentialMenu(uSPtr.getCount());
 		cin >> option;
 		switch (option)
 		{
@@ -812,11 +732,11 @@ void unsortedStackPointerOptions(UnsortedStackPointer &uSPArr)
 				cin.ignore(10000, '\n');
 			} while (cin.fail() || (songsLoaded < 0 || songsLoaded > linesLoaded));
 
-			uSPArr = UnsortedStackPointer();
+			uSPtr = UnsortedStackPointer();
 
 			for (int i = 0; i < songsLoaded; i++)
 			{
-				uSPArr.push(songVector[i]);
+				uSPtr.push(songVector[i]);
 			}
 			break;
 
@@ -847,7 +767,7 @@ void unsortedStackPointerOptions(UnsortedStackPointer &uSPArr)
 
 				  if (index != 0)
 				  {
-					  uSPArr.remove(index);
+					  uSPtr.remove(index);
 				  }
 		}
 			break;
@@ -859,14 +779,14 @@ void unsortedStackPointerOptions(UnsortedStackPointer &uSPArr)
 				  cin >> tid;
 				  if (tid != "0")
 				  {
-					  int index = uSPArr.sequentialSearch(tid);
+					  int index = uSPtr.sequentialSearch(tid);
 					  if (index == -1)
 					  {
 						  cout << "Song with Track ID " << tid << " not found" << endl;
 					  }
 					  else
 					  {
-						  Song s = uSPArr.get(index);
+						  Song s = uSPtr.get(index);
 						  cout << "Tid: " << s.getTid() << " Title:" << s.getTitle() << endl;
 					  }
 				  }
@@ -875,7 +795,7 @@ void unsortedStackPointerOptions(UnsortedStackPointer &uSPArr)
 
 
 		case 4:
-			uSPArr.print();
+			uSPtr.print();
 			break;
 
 		case 0:
@@ -889,7 +809,421 @@ void unsortedStackPointerOptions(UnsortedStackPointer &uSPArr)
 
 }
 
-//void performanceOptions(SortedArray &sArr, UnsortedArray &uArr, UnsortedPointer &uPtr)
-//{
+void performanceOptions(SortedArray &sArr, UnsortedArray &uArr, UnsortedPointer &uPtr, UnsortedStackArray &uSArr, UnsortedStackPointer &uSPtr)
+{
+	int option;
+	int option2;
+	Gnuplot plot;
+	clock_t t;
+	float time;
+	int mStart;
+	int m;
+	PROCESS_MEMORY_COUNTERS pmc;
+	int numberOfTimes[8] = { 1, 10, 100, 200, 400, 600, 800, 1000 };
+	string dataStructType[5] = { "sArr", "uArr", "uPtr" };
+	string dataStructFunction[5] = { "Add", "SeqS", "BinS", "Disp", "Remove" };
+	string perfType[2] = { "Cpu", "Mem" };
 
-//}
+	ofstream cpuAddFile;
+	ofstream memAddFile;
+
+	ofstream cpuSeqSFile;
+	ofstream memSeqSFile;
+
+	ofstream cpuBinSFile;
+	ofstream memBinSFile;
+
+	ofstream cpuDispFile;
+	ofstream memDispFile;
+
+	ofstream cpuRemoveFile;
+	ofstream memRemoveFile;
+
+	//sArr
+	cpuAddFile.open(dataStructType[0] + dataStructFunction[0] + perfType[0] + ".dat");
+	memAddFile.open(dataStructType[0] + dataStructFunction[0] + perfType[1] + ".dat");
+
+	cpuSeqSFile.open(dataStructType[0] + dataStructFunction[1] + perfType[0] + ".dat");
+	memSeqSFile.open(dataStructType[0] + dataStructFunction[1] + perfType[1] + ".dat");
+
+	cpuBinSFile.open(dataStructType[0] + dataStructFunction[2] + perfType[0] + ".dat");
+	memBinSFile.open(dataStructType[0] + dataStructFunction[2] + perfType[1] + ".dat");
+
+	cpuDispFile.open(dataStructType[0] + dataStructFunction[3] + perfType[0] + ".dat");
+	memDispFile.open(dataStructType[0] + dataStructFunction[3] + perfType[1] + ".dat");
+
+	cpuRemoveFile.open(dataStructType[0] + dataStructFunction[4] + perfType[0] + ".dat");
+	memRemoveFile.open(dataStructType[0] + dataStructFunction[4] + perfType[1] + ".dat");
+
+	cout << "Processing Sorted Array...";
+	for (int i = 0; i < 8; i++)
+	{
+		//adding
+		GetProcessMemoryInfo(GetCurrentProcess(), &pmc, sizeof(pmc));
+		mStart = pmc.WorkingSetSize;
+		t = clock();
+
+		sArr = SortedArray(numberOfTimes[i]);
+		for (int n = 0; n < numberOfTimes[i]; n++)
+		{
+			sArr.add(songVector[n]);
+		}
+		t = clock() - t;
+
+		GetProcessMemoryInfo(GetCurrentProcess(), &pmc, sizeof(pmc));
+		m = pmc.WorkingSetSize - mStart;
+		time = ((float)t / CLOCKS_PER_SEC);
+		cpuAddFile << numberOfTimes[i] << " " << time << endl;
+		memAddFile << numberOfTimes[i] << " " << (m/4096) << endl;
+
+		//sequential Search
+		GetProcessMemoryInfo(GetCurrentProcess(), &pmc, sizeof(pmc));
+		mStart = pmc.WorkingSetSize;
+		t = clock();
+
+		sArr.sequentialSearch("a");
+
+		GetProcessMemoryInfo(GetCurrentProcess(), &pmc, sizeof(pmc));
+		m = pmc.WorkingSetSize - mStart;
+		time = ((float)t / CLOCKS_PER_SEC);
+		cpuSeqSFile << numberOfTimes[i] << " " << time << endl;
+		memSeqSFile << numberOfTimes[i] << " " << (m / 4096) << endl;
+
+		//binary Search
+		GetProcessMemoryInfo(GetCurrentProcess(), &pmc, sizeof(pmc));
+		mStart = pmc.WorkingSetSize;
+		t = clock();
+
+		sArr.binarySearch("a", 0, sArr.getCount()-1);
+
+		GetProcessMemoryInfo(GetCurrentProcess(), &pmc, sizeof(pmc));
+		m = pmc.WorkingSetSize - mStart;
+		time = ((float)t / CLOCKS_PER_SEC);
+		cpuBinSFile << numberOfTimes[i] << " " << time << endl;
+		memBinSFile << numberOfTimes[i] << " " << (m / 4096) << endl;
+
+		//display
+		GetProcessMemoryInfo(GetCurrentProcess(), &pmc, sizeof(pmc));
+		mStart = pmc.WorkingSetSize;
+		t = clock();
+
+		sArr.print();
+
+		GetProcessMemoryInfo(GetCurrentProcess(), &pmc, sizeof(pmc));
+		m = pmc.WorkingSetSize - mStart;
+		time = ((float)t / CLOCKS_PER_SEC);
+		cpuDispFile << numberOfTimes[i] << " " << time << endl;
+		memDispFile << numberOfTimes[i] << " " << (m / 4096) << endl;
+
+		//remove
+		GetProcessMemoryInfo(GetCurrentProcess(), &pmc, sizeof(pmc));
+		mStart = pmc.WorkingSetSize;
+		t = clock();
+
+		sArr.remove(sArr.getCount());
+
+		GetProcessMemoryInfo(GetCurrentProcess(), &pmc, sizeof(pmc));
+		m = pmc.WorkingSetSize - mStart;
+		time = ((float)t / CLOCKS_PER_SEC);
+		cpuRemoveFile << numberOfTimes[i] << " " << time << endl;
+		memRemoveFile << numberOfTimes[i] << " " << (m / 4096) << endl;
+	}
+	cpuAddFile.close();
+	memAddFile.close();
+
+	cpuSeqSFile.close();
+	memSeqSFile.close();
+
+	cpuBinSFile.close();
+	memBinSFile.close();
+
+	cpuDispFile.close();
+	memDispFile.close();
+
+	cpuRemoveFile.close();
+	memRemoveFile.close();
+	cout << "Done" << endl;
+
+	//uArr
+	cpuAddFile.open(dataStructType[1] + dataStructFunction[0] + perfType[0] + ".dat");
+	memAddFile.open(dataStructType[1] + dataStructFunction[0] + perfType[1] + ".dat");
+
+	cpuSeqSFile.open(dataStructType[1] + dataStructFunction[1] + perfType[0] + ".dat");
+	memSeqSFile.open(dataStructType[1] + dataStructFunction[1] + perfType[1] + ".dat");
+
+	cpuDispFile.open(dataStructType[1] + dataStructFunction[3] + perfType[0] + ".dat");
+	memDispFile.open(dataStructType[1] + dataStructFunction[3] + perfType[1] + ".dat");
+
+	cpuRemoveFile.open(dataStructType[1] + dataStructFunction[4] + perfType[0] + ".dat");
+	memRemoveFile.open(dataStructType[1] + dataStructFunction[4] + perfType[1] + ".dat");
+
+	cout << "Processing Unsorted Array...";
+	for (int i = 0; i < 8; i++)
+	{
+		//adding
+		GetProcessMemoryInfo(GetCurrentProcess(), &pmc, sizeof(pmc));
+		mStart = pmc.WorkingSetSize;
+		t = clock();
+
+		uArr = UnsortedArray(numberOfTimes[i]);
+		for (int n = 0; n < numberOfTimes[i]; n++)
+		{
+			uArr.add(songVector[n]);
+		}
+		t = clock() - t;
+
+		GetProcessMemoryInfo(GetCurrentProcess(), &pmc, sizeof(pmc));
+		m = pmc.WorkingSetSize - mStart;
+		time = ((float)t / CLOCKS_PER_SEC);
+		cpuAddFile << numberOfTimes[i] << " " << time << endl;
+		memAddFile << numberOfTimes[i] << " " << (m / 4096) << endl;
+
+		//sequential Search
+		GetProcessMemoryInfo(GetCurrentProcess(), &pmc, sizeof(pmc));
+		mStart = pmc.WorkingSetSize;
+		t = clock();
+
+		uArr.sequentialSearch("a");
+
+		GetProcessMemoryInfo(GetCurrentProcess(), &pmc, sizeof(pmc));
+		m = pmc.WorkingSetSize - mStart;
+		time = ((float)t / CLOCKS_PER_SEC);
+		cpuSeqSFile << numberOfTimes[i] << " " << time << endl;
+		memSeqSFile << numberOfTimes[i] << " " << (m / 4096) << endl;
+
+		//display
+		GetProcessMemoryInfo(GetCurrentProcess(), &pmc, sizeof(pmc));
+		mStart = pmc.WorkingSetSize;
+		t = clock();
+
+		uArr.print();
+
+		GetProcessMemoryInfo(GetCurrentProcess(), &pmc, sizeof(pmc));
+		m = pmc.WorkingSetSize - mStart;
+		time = ((float)t / CLOCKS_PER_SEC);
+		cpuDispFile << numberOfTimes[i] << " " << time << endl;
+		memDispFile << numberOfTimes[i] << " " << (m / 4096) << endl;
+
+		//remove
+		GetProcessMemoryInfo(GetCurrentProcess(), &pmc, sizeof(pmc));
+		mStart = pmc.WorkingSetSize;
+		t = clock();
+
+		uArr.remove(uArr.getCount());
+
+		GetProcessMemoryInfo(GetCurrentProcess(), &pmc, sizeof(pmc));
+		m = pmc.WorkingSetSize - mStart;
+		time = ((float)t / CLOCKS_PER_SEC);
+		cpuRemoveFile << numberOfTimes[i] << " " << time << endl;
+		memRemoveFile << numberOfTimes[i] << " " << (m / 4096) << endl;
+	}
+	cpuAddFile.close();
+	memAddFile.close();
+
+	cpuSeqSFile.close();
+	memSeqSFile.close();
+
+	cpuDispFile.close();
+	memDispFile.close();
+
+	cpuRemoveFile.close();
+	memRemoveFile.close();
+	cout << "Done" << endl;
+
+	//uArr
+	cpuAddFile.open(dataStructType[2] + dataStructFunction[0] + perfType[0] + ".dat");
+	memAddFile.open(dataStructType[2] + dataStructFunction[0] + perfType[1] + ".dat");
+
+	cpuSeqSFile.open(dataStructType[2] + dataStructFunction[1] + perfType[0] + ".dat");
+	memSeqSFile.open(dataStructType[2] + dataStructFunction[1] + perfType[1] + ".dat");
+
+	cpuDispFile.open(dataStructType[2] + dataStructFunction[3] + perfType[0] + ".dat");
+	memDispFile.open(dataStructType[2] + dataStructFunction[3] + perfType[1] + ".dat");
+
+	cpuRemoveFile.open(dataStructType[2] + dataStructFunction[4] + perfType[0] + ".dat");
+	memRemoveFile.open(dataStructType[2] + dataStructFunction[4] + perfType[1] + ".dat");
+
+	cout << "Processing Unsorted Array...";
+	for (int i = 0; i < 8; i++)
+	{
+		//adding
+		GetProcessMemoryInfo(GetCurrentProcess(), &pmc, sizeof(pmc));
+		mStart = pmc.WorkingSetSize;
+		t = clock();
+
+		uPtr = UnsortedPointer();
+		for (int n = 0; n < numberOfTimes[i]; n++)
+		{
+			uPtr.add(songVector[n]);
+		}
+		t = clock() - t;
+
+		GetProcessMemoryInfo(GetCurrentProcess(), &pmc, sizeof(pmc));
+		m = pmc.WorkingSetSize - mStart;
+		time = ((float)t / CLOCKS_PER_SEC);
+		cpuAddFile << numberOfTimes[i] << " " << time << endl;
+		memAddFile << numberOfTimes[i] << " " << (m / 4096) << endl;
+
+		//sequential Search
+		GetProcessMemoryInfo(GetCurrentProcess(), &pmc, sizeof(pmc));
+		mStart = pmc.WorkingSetSize;
+		t = clock();
+
+		uPtr.sequentialSearch("a");
+
+		GetProcessMemoryInfo(GetCurrentProcess(), &pmc, sizeof(pmc));
+		m = pmc.WorkingSetSize - mStart;
+		time = ((float)t / CLOCKS_PER_SEC);
+		cpuSeqSFile << numberOfTimes[i] << " " << time << endl;
+		memSeqSFile << numberOfTimes[i] << " " << (m / 4096) << endl;
+
+		//display
+		GetProcessMemoryInfo(GetCurrentProcess(), &pmc, sizeof(pmc));
+		mStart = pmc.WorkingSetSize;
+		t = clock();
+
+		uPtr.print();
+
+		GetProcessMemoryInfo(GetCurrentProcess(), &pmc, sizeof(pmc));
+		m = pmc.WorkingSetSize - mStart;
+		time = ((float)t / CLOCKS_PER_SEC);
+		cpuDispFile << numberOfTimes[i] << " " << time << endl;
+		memDispFile << numberOfTimes[i] << " " << (m / 4096) << endl;
+
+		//remove
+		GetProcessMemoryInfo(GetCurrentProcess(), &pmc, sizeof(pmc));
+		mStart = pmc.WorkingSetSize;
+		t = clock();
+
+		uPtr.remove(uPtr.getCount());
+
+		GetProcessMemoryInfo(GetCurrentProcess(), &pmc, sizeof(pmc));
+		m = pmc.WorkingSetSize - mStart;
+		time = ((float)t / CLOCKS_PER_SEC);
+		cpuRemoveFile << numberOfTimes[i] << " " << time << endl;
+		memRemoveFile << numberOfTimes[i] << " " << (m / 4096) << endl;
+	}
+	cpuAddFile.close();
+	memAddFile.close();
+
+	cpuSeqSFile.close();
+	memSeqSFile.close();
+
+	cpuDispFile.close();
+	memDispFile.close();
+
+	cpuRemoveFile.close();
+	memRemoveFile.close();
+	cout << "Done" << endl;
+
+	do
+	{
+		performanceMenu();
+		cin >> option;
+		switch (option)
+		{
+		case 1:
+			performanceTypeMenu();
+			cin >> option2;
+			switch (option2)
+			{
+			case 1:
+				plot("   plot \"sArrAddCpu.dat\" with linespoints, \"uArrAddCpu.dat\" with linespoints, \"uPtrAddCpu.dat\" with linespoints");
+				break;
+			case 2:
+				plot("plot \"sArrAddMem.dat\" with linespoints, \"uArrAddMem.dat\" with linespoints, \"uPtrAddMem.dat\" with linespoints");
+				break;
+			default:
+				break;
+			}
+			break;
+
+		case 2:
+			performanceTypeMenu();
+			cin >> option2;
+			switch (option2)
+			{
+			case 1:
+				plot("   plot \"sArrRemoveCpu.dat\" with linespoints, \"uArrRemoveCpu.dat\" with linespoints, \"uPtrRemoveCpu.dat\" with linespoints");
+				break;
+			case 2:
+				plot("plot \"sArrRemoveMem.dat\" with linespoints, \"uArrRemoveMem.dat\" with linespoints, \"uPtrRemoveMem.dat\" with linespoints");
+				break;
+			default:
+				break;
+			}
+			break;
+		case 3:
+			performanceTypeMenu();
+			cin >> option2;
+			switch (option2)
+			{
+			case 1:
+				plot("   plot \"sArrSeqSCpu.dat\" with linespoints, \"uArrSeqSCpu.dat\" with linespoints, \"uPtrSeqSCpu.dat\" with linespoints");
+				break;
+			case 2:
+				plot("plot \"sArrSeqSMem.dat\" with linespoints, \"uArrSeqSMem.dat\" with linespoints, \"uPtrSeqSMem.dat\" with linespoints");
+				break;
+			default:
+				break;
+			}
+			break;
+
+		case 4:
+			performanceTypeMenu();
+			cin >> option2;
+			switch (option2)
+			{
+			case 1:
+				plot("   plot \"sArrDispCpu.dat\" with linespoints, \"uArrDispCpu.dat\" with linespoints, \"uPtrDispCpu.dat\" with linespoints");
+				break;
+			case 2:
+				plot("plot \"sArrDispMem.dat\" with linespoints, \"uArrDispMem.dat\" with linespoints, \"uPtrDispMem.dat\" with linespoints");
+				break;
+			default:
+				break;
+			}
+			break;
+
+		case 5:
+			performanceTypeMenu();
+			cin >> option2;
+			switch (option2)
+			{
+			case 1:
+				plot("   plot \"sArrSeqSCpu.dat\" with linespoints, \"sArrBinSCpu.dat\" with linespoints");
+				break;
+			case 2:
+				plot("   plot \"sArrSeqSMem.dat\" with linespoints, \"sArrBinSMem.dat\" with linespoints");
+				break;
+			default:
+				break;
+			}
+			break;
+
+		case 0:
+			break;
+		default:
+			break;
+		}
+	} while (option != 0);
+}
+
+void performanceMenu()
+{
+	cout << endl;
+	cout << "1. Compare add performance for all" << endl;
+	cout << "2. Compare remove for all" << endl;
+	cout << "3. Compare Sequential Search for all" << endl;
+	cout << "4. Compare display performance for all" << endl;
+	cout << "5. Compare search performance between Binary and Sequnential" << endl;
+	cout << "0. Return to previous menu" << endl;
+	cout << "Enter Option: ";
+}
+void performanceTypeMenu()
+{
+	cout << endl;
+	cout << "1. Compare CPU Time" << endl;
+	cout << "2. Compare Memory Usage" << endl;
+	cout << "Enter Option: ";
+}
